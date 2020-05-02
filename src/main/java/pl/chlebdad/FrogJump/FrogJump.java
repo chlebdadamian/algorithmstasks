@@ -2,6 +2,10 @@ package pl.chlebdad.FrogJump;
 
 public class FrogJump {
 
+    /**
+     * The problem is to count the minimum number of jumps from position X to Y.
+     */
+
     public static void main(String[] args) {
 
         System.out.println(solution(2, 6, 3));
