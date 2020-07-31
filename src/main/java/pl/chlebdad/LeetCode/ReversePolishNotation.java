@@ -7,7 +7,7 @@ public class ReversePolishNotation {
     public static void main(String[] args) {
 
         String[] tokens = new String[]{"2", "1", "+", "3", "*"};
-        System.out.println(reversePN(tokens));
+        System.out.println(ReversePolishNotation("1 2 + 3 *"));
 
     }
 
@@ -49,5 +49,52 @@ public class ReversePolishNotation {
 
 
         return result.pop();
+    }
+
+    public static String ReversePolishNotation(String str) {
+
+        String strTrimmed = str.replaceAll("[ \\t\\n\\x0B\\f\\r]", "");
+        //String expr;
+        char[] arr = strTrimmed.toCharArray();
+
+        String signs = new String("+-*/");
+
+        Stack<Integer> result = new Stack<>();
+
+        for (char s : arr) {
+
+            if (!signs.contains(Character.toString(s))) {
+                result.push(Character.getNumericValue(s));
+            } else {
+
+                int a = result.pop();
+                int b = result.pop();
+
+                switch (signs.indexOf(Character.toString(s))) {
+
+                    case 0:
+                        result.push(a + b);
+                        break;
+                    case 1:
+                        result.push(a - b);
+                        break;
+                    case 2:
+                        result.push(a * b);
+                        break;
+                    case 3:
+                        if (b != 0) {
+                            result.push(a / b);
+                        } else {
+                            return "0";
+                        }
+                        break;
+
+                }
+
+            }
+
+        }
+        // code goes here
+        return String.valueOf(result.pop());
     }
 }
